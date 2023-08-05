@@ -1,0 +1,26 @@
+/* index.css */
+
+:root {
+    --primary-color: black;
+    --button-text-color: white;
+    /* coupon */
+    --coupon-text-color: white;
+    --coupon-bg-color: #fbc528;
+    /* button */
+    --button-bg-color: green;
+    --cart-button-bg-color: white;
+    --font-weight: 500;
+    --font-size: 15px;
+    --background-color: white;
+    --opacity: 0.5;
+  }
+
+
+  .button_cart {
+    border-radius: 50px !important;
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+    font-size: small !important;
+  }
+
+
+

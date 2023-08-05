@@ -1,0 +1,17 @@
+/* YourReactComponent.css */
+
+.tabs {
+    color: var(--primary-color);
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+    background-color: var(--background-color);
+    padding: var(--padding);
+    opacity: var(--opacity);
+  }
+
+  .categories {
+    color: var(--primary-color);
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+    opacity: var(--opacity);
+  }
