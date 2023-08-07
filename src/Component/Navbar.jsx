@@ -12,12 +12,13 @@ import "../Constants/index.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./navbar.module.css";
 import ProfileIcon from "./Posts/ProfileIcon";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavCategory = [
   {
     id: 1,
-    category_name: "Home",
-    route_name: "",
+    category_name:JSON.parse(localStorage.getItem("isAuth")) ? "Logout" : "SignUp",
+    route_name: JSON.parse(localStorage.getItem("isAuth")) ? "logout" : "",
   },
   {
     id: 2,
@@ -28,17 +29,47 @@ const NavCategory = [
 
 export const Navbar = () => {
   //eslint-disable-next-line
-  const [type, setType] = useState(NavCategory);
+  const dispatch=useDispatch();
+  // const [type, setType] = useState(NavCategory);
+  const { isAuth} = useSelector(
+    (store) => store.AuthReducer
+  );
+
   const location = useLocation();
   const navigate = useNavigate();
   const currentRoute = location.pathname.substring(1);
   const [routeName, setRouteName] = useState("");
 
   useEffect(() => {
+    if (isAuth) {
+      NavCategory[0].category_name = "Logout";
+      NavCategory[0].route_name = "logout";
+    }
+    else{
+      NavCategory[0].category_name = "SignUp";
+      NavCategory[0].route_name = "";
+    }
+  }, [isAuth]);
+
+
+  useEffect(() => {
     setRouteName(currentRoute);
   }, [currentRoute]);
+
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   var display=!isMobile ? "inline" : "none";
+  const handlenavigate=(el)=>{
+
+    if(el.category_name === "Logout")
+    {
+      dispatch({ type: 'GET_LOGOUT'});
+      navigate("/");
+    }
+    else{
+      navigate("/".concat(el.route_name));
+    }
+
+  }
 
   return (
     <>
@@ -83,10 +114,10 @@ export const Navbar = () => {
             {/* category */}
             <Box
               flex={0.7}
-              //  backgroundColor={'red'}
+
             >
               <HStack spacing={"10px"}>
-                {type?.map((el, index) => (
+                {NavCategory?.map((el, index) => (
                   <Box
                     key={index}
                     _hover={{
@@ -99,7 +130,7 @@ export const Navbar = () => {
                     }
                     cursor="pointer"
                     transition="border-bottom 0.3s ease-in-out" // Add transition property
-                    onClick={() => navigate("/".concat(el.route_name))}
+                    onClick={() => handlenavigate(el) }
                   >
                     <Text className={styles.tabs}>{el.category_name}</Text>
                   </Box>

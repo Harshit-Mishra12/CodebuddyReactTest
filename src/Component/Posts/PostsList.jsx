@@ -1,14 +1,31 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import React ,{useEffect,useState} from "react";
-import { posts as data} from "../../Assets/dummy";
+// import { posts as data} from "../../Assets/dummy";
 import PostsCard from "./PostsCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../../Redux/AppReducer/Action";
 
 export const PostsList = () => {
+  const { Posts} = useSelector(
+    (store) => store.AppReducer
+  );
+
   const [posts, setPosts] = useState([]);
 
-  useEffect(()=>{
-    setPosts(data);
+  const dispatch=useDispatch();
+
+  useEffect(() => {
+    setPosts(Posts);
+    },[Posts]);
+
+  useEffect(() => {
+  dispatch(getPosts());
+  //eslint-disable-next-line
   },[]);
+
+  // useEffect(()=>{
+  //   setPosts(data);
+  // },[]);
   return (
     <Box>
       <SimpleGrid
