@@ -4,7 +4,9 @@ import { Box } from "@chakra-ui/react";
 import Navbar from "../Component/Navbar";
 
 
+
 const Post = () => {
+
 
 
   return (

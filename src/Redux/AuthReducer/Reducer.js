@@ -35,6 +35,16 @@ const reducer = (state = initialState, action) => {
 
       };
 
+      case 'GET_LOGOUT':
+        localStorage.setItem("isAuth", false);
+        return {
+          ...state,
+          isAuth: false,
+          isLoading: false,
+
+        };
+
+
 
 
 
